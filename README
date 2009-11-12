@@ -1,0 +1,27 @@
+This utility will take in an input string, and a size, and cut it down to be that size.
+Then, it will store its state in /tmp/marquee, which will be a single integer meaning the number of characters to skip.
+Once run it will update that to be one greater.
+
+Once the value is the same as string length it will make the value -(requested length), which means to put that many spaces before the input.
+
+This means will mean that every time it is run it will show a different part of the text.
+
+For example, if our input string is "0123456789"
+Then running `marquee 3` the first time will give us "012" and put "1" into /tmp/marquee.
+
+Then, the next run will be "123" and "2" into /tmp/marquee.
+It will proceed as:
+234
+345
+456
+567
+678
+789
+89 
+9  
+   
+At this point it will put "-2" into /tmp/marquee, which will render "  0", then:
+ 01
+012
+
+etc.

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+SIZE="$1"
+
+if [ -n "$LENGTH" ]; then
+	SIZE="20"
+fi
+
+if [ -r '/tmp/marquee' ]; then
+	POS="`cat /tmp/marquee`"
+else 
+	POS="0"
+fi
+
+STRING="`cat`"
+
+LENGTH="`echo "$STRING" | wc -m`"
+
+if [ "$POS" -ge 0 ]; then
+	echo "$STRING" | cut -c "`expr 1 + $POS`"- - 
+else
+	echo "$STRING" | cut -c -"`expr "$SIZE" + "$POS"`" -
+fi | cut -c -"$SIZE" - | xargs -d '\n' printf "%""`if [ "$POS" -ge 0 ]; then echo "-"; fi`""$SIZE""s\\n"
+
+if [ "$LENGTH" -le "$POS" ]; then
+	echo "-`expr "$SIZE" - 1`" > /tmp/marquee
+else
+	expr "$POS" + 1 > /tmp/marquee
+fi
