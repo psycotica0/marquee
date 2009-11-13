@@ -2,7 +2,7 @@
 
 SIZE="$1"
 
-if [ -n "$LENGTH" ]; then
+if [ -z "$SIZE" ]; then
 	SIZE="20"
 fi
 
