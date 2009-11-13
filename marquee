@@ -1,9 +1,14 @@
 #!/bin/sh
 
 SIZE="$1"
+INCREMENT="$2"
 
 if [ -z "$SIZE" ]; then
 	SIZE="20"
+fi
+
+if [ -z "$INCREMENT" ]; then
+	INCREMENT="1"
 fi
 
 if [ -r '/tmp/marquee' ]; then
@@ -25,5 +30,5 @@ fi | cut -c -"$SIZE" - | xargs -d '\n' printf "%""`if [ "$POS" -ge 0 ]; then ech
 if [ "$LENGTH" -le "$POS" ]; then
 	echo "-`expr "$SIZE" - 1`" > /tmp/marquee
 else
-	expr "$POS" + 1 > /tmp/marquee
+	expr "$POS" + "$INCREMENT" > /tmp/marquee
 fi
